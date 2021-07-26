@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>aline</title>
+	<style type="text/css">
+		* {
+			margin: 0;
+			padding: 0;
+			outline: none;
+			box-sizing: border-box;
+		}
+		body {
+			width: 100vw;
+			height: 100vh;
+		}
+		/* flex Absolute center */
+		.flex {
+			display: flex;
+		}
+		.flex-col {
+			display: flex;
+			flex-direction: column;
+		}
+		.flex-row {
+			display: flex;
+			flex-direction: row;
+		}
+		.flex-abc {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+		.operateBar {
+			align-self: flex-end;
+			height: 30px;
+			width: 200px;
+			border: 1px solid red;
+			margin-bottom: 0.5rem;
+		}
+		.container {
+			width: 900px;
+			height: 600px;
+		}
+		.blocks {
+			height: 100%;
+			width: 100%;
+			border: 1px solid #eee;
+		}
+		.project {
+			width: 200px;
+			height: 100%;
+			text-align: right;
+			padding: 0 4px;
+			border-right: 1px solid blue;
+			font-size: 14px;
+		}
+		.task {
+			width: calc(100% - 200px);
+			height: 100%;
+			/*background: #23887691;*/
+			padding: 0 4px;
+		}
+		.project-item {
+			border: 1px solid #5b8ff3;
+			margin: 4px 0;
+		}
+		.p-item-inner {
+			padding-right: 6px;
+		}
+		.task-item {
+			border: 1px solid #ccc;
+			margin: 4px 0;
+			padding-left: 6px;
+		}
+		.task-status {
+			width: 100%;
+			border-top: 1px solid #5b8ff3;
+			align-items: flex-end;
+		}
+		.ts-inner {
+			width: 90%;
+			height: 3px;
+			background: #5b8ff3;
+		}
+
+		/*border-top: 12px solid #4b4f55;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;*/
+	</style>
+</head>
+<body class="flex-abc">
+	<div class="outer flex-col">
+		<div class="operateBar"></div>
+		<div class="container">
+			<div class="blocks flex-row">
+				<div class="project">
+					<div class="project-item">
+						<div class="p-item-inner">
+							<font>完成看板 1</font>
+						</div>
+						<div class="task-status flex-col">
+							<div class="ts-inner"></div>
+						</div>
+					</div>
+					<div class="project-item">
+						<div class="p-item-inner">
+							<font>完成看板 2</font>
+						</div>
+						<div class="task-status flex-col">
+							<div class="ts-inner"></div>
+						</div>
+					</div>
+				</div>
+				<div class="task">
+					<div class="task-item">
+						<input type="checkbox" class="checkbox">
+						<font>任务 1</font>
+					</div>
+					<div class="task-item">
+						<input type="checkbox" class="checkbox">
+						<font>任务 1</font>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
