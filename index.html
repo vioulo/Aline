@@ -70,9 +70,11 @@
 			padding-right: 6px;
 		}
 		.task-item {
-			border: 1px solid #ccc;
+			display: flex;
+			font-size: 13px;
 			margin: 4px 0;
-			padding-left: 6px;
+			padding: 6px;
+			border: 1px solid #ccc;
 		}
 		.task-status {
 			width: 100%;
@@ -101,16 +103,43 @@
 		.project-item.active .ts-inner {
 			background: #5b8ff3;
 		}
+		.task-mark {
+			width: 16px;
+			height: 16px;
+			display: grid;
+			grid-template-columns: 8px 8px;
+			background: #f3f3fd;
+		}
+		.task-mark-item.left-top {
+			background: #ff00dd;
+			grid-column-start: 1;
+			grid-column-end: 2;
+			grid-row-start: 1;
+			grid-row-end: 2;
+		}
+		.task-mark-item.right-top {
+			background: #2163ff;
+			grid-column-start: 2;
+			grid-row-start: 1;
+			grid-row-end: 2;
+		}
+		.task-mark-item.left-bottom {
+			background: #2163ff;
+			grid-column-start: 1;
+			grid-column-end: 2;
+			grid-row-start: 2;
+		}
+		.task-mark-item.right-bottom {
+			background: #2163ff;
+			grid-column-start: 2;
+			grid-row-start: 2;
+		}
+		.task-cont {
+			margin-left: 6px;
+		}
 	</style>
-	<link rel="stylesheet" type="text/css" href="./assets/css/checkbox.css">
 </head>
 <body class="flex-abc">
-	<!--SVG Sprites-->
-	<svg class="inline-svg">
-		<symbol id="cbox" viewbox="0 0 12 10">
-			<polyline points="1.5 6 4.5 9 10.5 1"></polyline>
-		</symbol>
-	</svg>
 	<div class="outer flex-col">
 		<div class="operateBar"></div>
 		<div class="container">
@@ -135,26 +164,11 @@
 				</div>
 				<div class="task">
 					<div class="task-item">
-						<input class="checkbox" id="mine1" type="checkbox"/>
-						<label class="cbx" for="mine1">
-							<div class="cbx-blk">
-								<svg width="12px" height="10px">
-									<use xlink:href="#cbox"></use>
-								</svg>
-							</div>
-							<div class="cbx-txt">task 1</div>
-						</label>
-					</div>
-					<div class="task-item">
-						<input class="checkbox" id="mine2" type="checkbox"/>
-						<label class="cbx" for="mine2">
-							<div class="cbx-blk">
-								<svg width="12px" height="10px">
-									<use xlink:href="#cbox"></use>
-								</svg>
-							</div>
-							<div class="cbx-txt">task 2</div>
-						</label>
+						<div class="task-mark">
+							<div class="task-mark-item left-top"></div>
+							<div class="task-mark-item right-bottom"></div>
+						</div>
+						<div class="task-cont">任务一</div>
 					</div>
 				</div>
 			</div>
