@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>checkbox</title>
+	<link rel="stylesheet" type="text/css" href="./assets/css/checkbox.css">
+</head>
+<body>
+	<!--SVG Sprites-->
+	<svg class="inline-svg">
+		<symbol id="cbox" viewbox="0 0 12 10">
+			<polyline points="1.5 6 4.5 9 10.5 1"></polyline>
+		</symbol>
+	</svg>
+	<div class="task-item">
+		<input class="checkbox" id="mine2" type="checkbox"/>
+		<label class="cbx" for="mine2">
+			<div class="cbx-blk">
+				<svg width="12px" height="10px">
+					<use xlink:href="#cbox"></use>
+				</svg>
+			</div>
+			<div class="cbx-txt">task 2</div>
+		</label>
+	</div>
+</body>
+</html>
