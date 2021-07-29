@@ -75,6 +75,7 @@
 			margin: 4px 0;
 			padding: 6px;
 			border: 1px solid #ccc;
+			position: relative;
 		}
 		.task-status {
 			width: 100%;
@@ -137,6 +138,60 @@
 		.task-cont {
 			margin-left: 6px;
 		}
+		.task-ope {
+			visibility: hidden;
+			position: absolute;
+			right: 6px;
+			cursor: pointer;
+		}
+		.task-item:hover .task-ope {
+			visibility: visible;
+		}
+		.task-edit, .task-assign, .task-del {
+			width: 12px;
+			height: 5px;
+			display: block;
+			margin-bottom: 2px;
+		}
+		.task-edit {
+			/*background: #00bcd4;*/
+			background: #a6ecf5;
+			border: 1px solid #3b85da;
+			/*border-radius: 5px;*/
+			box-shadow: 1px 1px #e8c1c1;
+		}
+		.task-assign {
+
+			top: 13px;
+			background: #00bcd4;
+			border: 1px solid #3b85da;
+			box-shadow: 1px 1px #e8c1c1;
+		}
+		.task-del {
+			top: 20px;
+			background: #ff0303;
+			border: 1px solid #3b85da;
+			box-shadow: 1px 1px #e8c1c1;
+		}
+		.dg-ghostClass {
+			height: 33px;
+			border: 1px dashed #ccc;
+		}
+		.dg-ghostClass * {
+			visibility: hidden;
+		}
+		.dg-dragClass {
+			background: #ccc;
+			border: 1px solid #000;
+		}
+		.task-time {
+			position: absolute;
+			right: 20px;
+			top: 24px;
+			font-size: 4px;
+			background: #fff;
+			padding: 0 2px;
+		}
 	</style>
 </head>
 <body class="flex-abc">
@@ -162,17 +217,71 @@
 						</div>
 					</div>
 				</div>
-				<div class="task">
+				<div class="task" id="task">
 					<div class="task-item">
 						<div class="task-mark">
 							<div class="task-mark-item left-top"></div>
 							<div class="task-mark-item right-bottom"></div>
 						</div>
 						<div class="task-cont">任务一</div>
+						<div class="task-ope">
+							<div class="task-edit"></div>
+							<div class="task-assign"></div>
+							<div class="task-del"></div>
+						</div>
+						<div class="task-time">2021-07-29 17:20:03</div>
+					</div>
+					<div class="task-item">
+						<div class="task-mark">
+							<div class="task-mark-item left-top"></div>
+							<div class="task-mark-item right-bottom"></div>
+						</div>
+						<div class="task-cont">任务二</div>
+						<div class="task-ope">
+							<div class="task-edit"></div>
+							<div class="task-assign"></div>
+							<div class="task-del"></div>
+						</div>
+						<div class="task-time">2021-07-29 17:20:03</div>
+					</div>
+					<div class="task-item">
+						<div class="task-mark">
+							<div class="task-mark-item right-bottom"></div>
+							<div class="task-mark-item top-bottom"></div>
+						</div>
+						<div class="task-cont">任务三</div>
+						<div class="task-ope">
+							<div class="task-edit"></div>
+							<div class="task-assign"></div>
+							<div class="task-del"></div>
+						</div>
+						<div class="task-time">2021-07-29 17:20:03</div>
+					</div>
+					<div class="task-item">
+						<div class="task-mark">
+							<div class="task-mark-item left-top"></div>
+							<div class="task-mark-item right-bottom"></div>
+						</div>
+						<div class="task-cont">任务四</div>
+						<div class="task-ope">
+							<div class="task-edit"></div>
+							<div class="task-assign"></div>
+							<div class="task-del"></div>
+						</div>
+						<div class="task-time">2021-07-29 17:20:03</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 </body>
+<script type="text/javascript" src="assets/js/Sortable.min.js"></script>
+<script type="text/javascript">
+	new Sortable(document.getElementById('task'), {
+		animation: 150,
+		ghostClass: "dg-ghostClass",
+		dragClass: "dg-dragClass",
+		removeCloneOnHide: true
+	});
+</script>
 </html>
