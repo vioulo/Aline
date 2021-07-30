@@ -195,6 +195,7 @@
 			visibility: visible;
 		}
 	</style>
+	<link rel="stylesheet" type="text/css" href="assets/css/contextMenu.css">
 </head>
 <body class="flex-abc">
 	<div class="outer flex-col">
@@ -296,6 +297,31 @@
 		ghostClass: "dg-ghostClass",
 		dragClass: "dg-dragClass",
 		removeCloneOnHide: true
+	});
+</script>
+<script type="text/javascript" src="assets/js/contextMenu.js"></script>
+<script type="text/javascript">
+	const cMenu = ContextMenu({
+		menus: [
+			{
+				name: "custom menu 1",
+				onClick: function (e) {
+					console.log("menu1 clicked");
+				},
+			},
+			{
+				name: "custom menu 2",
+				onClick: function (e) {
+					console.log("menu2 clicked");
+				},
+			},
+			{
+				name: "custom menu 3",
+				onClick: function (e) {
+					console.log("menu3 clicked");
+				},
+			},
+		],
 	});
 </script>
 </html>

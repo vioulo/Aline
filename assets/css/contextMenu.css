@@ -1,0 +1,26 @@
+.custom-context-menu {
+	position: fixed;
+	background: #fff;
+	list-style: none;
+}
+.custom-context-menu.hidden {
+	display: none;
+}
+.custom-context-menu li {
+	margin-top: -1px;
+	padding: 8px 12px;
+	border: 1px solid #ccc;
+	user-select: none;
+	transition: all 0.1s;
+}
+
+.custom-context-menu li:hover {
+	background: #0170fe;
+	border: 1px solid #0170fe;
+	color: #fff;
+	cursor: pointer;
+}
+.custom-context-menu li:active {
+	background: #f0f2f7;
+	border-color: #f0f2f7;
+} 
