@@ -38,14 +38,13 @@
 		.blocks {
 			height: 100%;
 			width: 100%;
-			border: 1px solid #eee;
 		}
 		.project {
 			width: 200px;
 			height: 100%;
 			text-align: right;
 			padding: 0 4px;
-			border-right: 1px solid #b3b3b3;
+			border-right: 1px dashed #e3e3e3;
 			font-size: 14px;
 		}
 		.task {
@@ -56,38 +55,27 @@
 		}
 		.project-item {
 			border: 1px solid #ccc;
-			margin: 4px 0;
+			margin-bottom: -1px;
 			position: relative;
+			padding: 3px 6px;
+			background: linear-gradient(to left, #ddd 63%, #fff 0%);
 		}
-		.p-item-inner {
-			padding-right: 6px;
+		.project-item.active {
+			z-index: 1;
+			border-color: #5b8ff3;
+			color: #fff;
+			background: linear-gradient(to left, #6892f5 83%, #fff 0%);
+		}
+		.project-item:hover {
+			border-left-color: #5b8ff3;
 		}
 		.task-item {
 			display: flex;
 			font-size: 13px;
-			margin: 4px 0;
+			margin-bottom: -1px;
 			padding: 6px;
 			border: 1px solid #ccc;
 			position: relative;
-		}
-		.task-status {
-			width: 100%;
-			border-top: 1px solid #ccc;
-			align-items: flex-end;
-		}
-		.ts-inner {
-			width: 90%;
-			height: 3px;
-			background: #ccc;
-		}
-		.project-item.active {
-			border-color: #5b8ff3;
-		}
-		.project-item.active .task-status {
-			border-top-color: #5b8ff3;
-		}
-		.project-item.active .ts-inner {
-			background: #5b8ff3;
 		}
 		.task-mark {
 			width: 16px;
@@ -164,6 +152,7 @@
 		.dg-ghostClass {
 			height: 33px;
 			border: 1px dashed #ccc;
+			margin: 2px 0;
 		}
 		.dg-ghostClass * {
 			visibility: hidden;
@@ -197,18 +186,12 @@
 				<div class="project">
 					<div class="project-item active">
 						<div class="p-item-inner">
-							<font>完成看板 1</font>
-						</div>
-						<div class="task-status flex-col">
-							<div class="ts-inner"></div>
+							<font>看板基础操作</font>
 						</div>
 					</div>
 					<div class="project-item">
 						<div class="p-item-inner">
-							<font>完成看板 2</font>
-						</div>
-						<div class="task-status flex-col">
-							<div class="ts-inner"></div>
+							<font>看板数据保存</font>
 						</div>
 					</div>
 				</div>
