@@ -136,6 +136,9 @@
 			right: 6px;
 			cursor: pointer;
 		}
+		.task-item:hover {
+			background: #ffeb3b;
+		}
 		.task-item:hover .task-ope {
 			visibility: visible;
 		}
@@ -177,12 +180,19 @@
 			border: 1px solid #000;
 		}
 		.task-time {
+			visibility: hidden;
 			position: absolute;
-			right: 20px;
-			top: 24px;
-			font-size: 4px;
-			background: #fff;
-			padding: 0 2px;
+			top: -0.75px;
+			right: -120px;
+			font-size: 6px;
+			border: 1px dashed #00ab39;
+			padding: 0px 3px;
+		}
+		.tt-created {
+			border-bottom: 1px solid #ccc;
+		}
+		.task-ope:hover + .task-time{
+			visibility: visible;
 		}
 	</style>
 </head>
@@ -221,7 +231,10 @@
 							<div class="task-assign"></div>
 							<div class="task-del"></div>
 						</div>
-						<div class="task-time">2021-07-29 17:20:03</div>
+						<div class="task-time">
+							<div class="tt-created">2021-07-29 17:20:03</div>
+							<div class="tt-updated">2021-07-29 17:20:03</div>
+						</div>
 					</div>
 					<div class="task-item">
 						<div class="task-mark">
@@ -234,7 +247,10 @@
 							<div class="task-assign"></div>
 							<div class="task-del"></div>
 						</div>
-						<div class="task-time">2021-07-29 17:20:03</div>
+						<div class="task-time">
+							<div class="tt-created">2021-07-29 17:20:03</div>
+							<div class="tt-updated">2021-07-29 17:20:03</div>
+						</div>
 					</div>
 					<div class="task-item">
 						<div class="task-mark">
@@ -247,7 +263,10 @@
 							<div class="task-assign"></div>
 							<div class="task-del"></div>
 						</div>
-						<div class="task-time">2021-07-29 17:20:03</div>
+						<div class="task-time">
+							<div class="tt-created">2021-07-29 17:20:03</div>
+							<div class="tt-updated">2021-07-29 17:20:03</div>
+						</div>
 					</div>
 					<div class="task-item">
 						<div class="task-mark">
@@ -260,7 +279,10 @@
 							<div class="task-assign"></div>
 							<div class="task-del"></div>
 						</div>
-						<div class="task-time">2021-07-29 17:20:03</div>
+						<div class="task-time">
+							<div class="tt-created">2021-07-29 17:20:03</div>
+							<div class="tt-updated">2021-07-29 17:20:03</div>
+						</div>
 					</div>
 				</div>
 			</div>
