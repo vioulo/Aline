@@ -1,57 +1,59 @@
 
-const ContextMenu = function (options) {
-	let instance;
+function createMenu(menus) {
 
-	function createMenu() {
-		const ul = document.createElement("ul");
-		ul.classList.add("custom-context-menu");
-		const { menus } = options;
-		if (menus && menus.length > 0) {
-			for (let menu of menus) {
-				const li = document.createElement("li");
-				li.textContent = menu.name;
-				li.onclick = menu.onClick;
-				ul.appendChild(li);
-			}
+	let ul = document.createElement("ul");
+	ul.classList.add("custom-context-menu");
+
+	if (menus && menus.length > 0) {
+		for (let menu of menus) {
+			let li = document.createElement("li");
+			li.textContent = menu.name;
+			li.onclick = menu.onClick;
+			ul.appendChild(li);
 		}
-		const body = document.querySelector("body");
-		body.appendChild(ul);
-		return ul;
 	}
-
-	return {
-		getInstance: function () {
-			if (!instance) {
-				instance = createMenu();
-			}
-			return instance;
-		},
-	};
-};
-
-// const cMenu = ContextMenu({
-// 	menus: [
-// 		{
-// 			name: "custom menu 1",
-// 				onClick: function (e) {
-// 				onsole.log("menu1 clicked");
-// 			},
-// 		},
-// 	],
-// });
-
-function showMenu(e) {
-	e.preventDefault();
-	const menus = cMenu.getInstance();
-
-	menus.style.top = `${e.clientY}px`;
-	menus.style.left = `${e.clientX}px`;
-	menus.classList.remove("hidden");
+	let body = document.querySelector("body");
+	body.appendChild(ul);
+	return ul;
 }
 
-function hideMenu(event) {
-	const menus = cMenu.getInstance();
-	menus.classList.add("hidden");
+function showMenu(e) {
+
+	hideMenu();
+	e.preventDefault();
+
+	let menus = [
+			{
+				name: "custom menu 1",
+				onClick: function (e) {
+					console.log("menu1 clicked");
+				},
+			},
+			{
+				name: "custom menu 2",
+				onClick: function (e) {
+					console.log("menu2 clicked");
+				},
+			},
+			{
+				name: "custom menu 3",
+				onClick: function (e) {
+					console.log("menu3 clicked");
+				},
+			},
+		];
+
+	let mblk = createMenu(menus);
+
+	mblk.style.top = `${e.clientY}px`;
+	mblk.style.left = `${e.clientX}px`;
+	mblk.classList.remove("hidden");
+}
+
+function hideMenu() {
+
+	let menu = document.querySelector(".custom-context-menu");
+	if (menu) menu.remove();
 }
 
 document.addEventListener("contextmenu", showMenu);
