@@ -46,6 +46,7 @@
 			padding: 0 4px;
 			border-right: 1px dashed #e3e3e3;
 			font-size: 14px;
+			position: relative;
 		}
 		.task {
 			width: calc(100% - 200px);
@@ -165,7 +166,7 @@
 			visibility: hidden;
 			position: absolute;
 			top: -0.75px;
-			right: -120px;
+			right: -115px;
 			font-size: 6px;
 			border: 1px solid #24e063;
 			padding: 0px 3px;
@@ -173,12 +174,51 @@
 			transition: opacity 0.3s;
 		}
 		.tt-created {
-			padding-top: 1px;
 			border-bottom: 1px dashed #000;
 		}
 		.task-ope:hover + .task-time{
 			visibility: visible;
 			opacity: 1;
+		}
+		.task-add, .project-add {
+			visibility: hidden;
+			width: 16px;
+			height: 16px;
+			margin-top: 6px;
+			border: 1px solid #ccc;
+			box-shadow: 2px 2px 4px #ccc;
+		}
+		.task-add:hover, .project-add:hover {
+			cursor: pointer;
+			border-color: #5591ff;
+		}
+		.project-add {
+			position: absolute;
+			right: 4px;
+			box-shadow: -2px 2px 4px #ccc;
+		}
+		.task:hover .task-add {
+			visibility: visible;
+		}
+		.project:hover .project-add {
+			visibility: visible;
+		}
+		.pi-ope {
+			visibility: hidden;
+			width: 8px;
+			height: 8px;
+			position: absolute;
+			top: -4px;
+			left: -4px;
+			border: 1px solid #5a58d0;
+			border-radius: 5px;
+			background: #3562e0;
+			box-shadow: 2px 4px 4px #ccc;
+			z-index: 10;
+			cursor: pointer;
+		}
+		.project-item:hover .pi-ope {
+			visibility: visible;
 		}
 	</style>
 </head>
@@ -187,83 +227,90 @@
 		<div class="container">
 			<div class="blocks flex-row">
 				<div class="project">
-					<div class="project-item active">
-						<div class="p-item-inner">
-							<font>看板基础操作</font>
+					<div class="project-list">
+						<div class="project-item active">
+							<div class="p-item-inner">
+								<font>看板基础操作</font>
+							</div>
+							<div class="pi-ope"></div>
+						</div>
+						<div class="project-item">
+							<div class="p-item-inner">
+								<font>看板数据保存</font>
+							</div>
+							<div class="pi-ope"></div>
 						</div>
 					</div>
-					<div class="project-item">
-						<div class="p-item-inner">
-							<font>看板数据保存</font>
-						</div>
-					</div>
+					<div class="project-add"></div>
 				</div>
-				<div class="task" id="task">
-					<!-- 添加滚动条后，task time 被遮挡，这部分是不是应该放 js 里，当 task-ope hover 时 计算位置并显示？-->
-					<div class="task-item">
-						<div class="task-mark">
-							<div class="task-mark-item left-top"></div>
-							<div class="task-mark-item right-bottom"></div>
+				<div class="task">
+					<div id="task-list">
+						<div class="task-item">
+							<div class="task-mark">
+								<div class="task-mark-item left-top"></div>
+								<div class="task-mark-item right-bottom"></div>
+							</div>
+							<div class="task-cont">任务一</div>
+							<div class="task-ope">
+								<div class="task-edit"></div>
+								<div class="task-assign"></div>
+								<div class="task-del"></div>
+							</div>
+							<div class="task-time">
+								<div class="tt-created">2021-07-29 17:20:03</div>
+								<div class="tt-updated">2021-07-29 17:20:03</div>
+							</div>
 						</div>
-						<div class="task-cont">任务一</div>
-						<div class="task-ope">
-							<div class="task-edit"></div>
-							<div class="task-assign"></div>
-							<div class="task-del"></div>
+						<div class="task-item">
+							<div class="task-mark">
+								<div class="task-mark-item left-top"></div>
+								<div class="task-mark-item right-bottom"></div>
+							</div>
+							<div class="task-cont">任务二</div>
+							<div class="task-ope">
+								<div class="task-edit"></div>
+								<div class="task-assign"></div>
+								<div class="task-del"></div>
+							</div>
+							<div class="task-time">
+								<div class="tt-created">2021-07-29 17:20:03</div>
+								<div class="tt-updated">2021-07-29 17:20:03</div>
+							</div>
 						</div>
-						<div class="task-time">
-							<div class="tt-created">2021-07-29 17:20:03</div>
-							<div class="tt-updated">2021-07-29 17:20:03</div>
+						<div class="task-item">
+							<div class="task-mark">
+								<div class="task-mark-item right-bottom"></div>
+								<div class="task-mark-item top-bottom"></div>
+							</div>
+							<div class="task-cont">任务三</div>
+							<div class="task-ope">
+								<div class="task-edit"></div>
+								<div class="task-assign"></div>
+								<div class="task-del"></div>
+							</div>
+							<div class="task-time">
+								<div class="tt-created">2021-07-29 17:20:03</div>
+								<div class="tt-updated">2021-07-29 17:20:03</div>
+							</div>
+						</div>
+						<div class="task-item">
+							<div class="task-mark">
+								<div class="task-mark-item left-top"></div>
+								<div class="task-mark-item right-bottom"></div>
+							</div>
+							<div class="task-cont">任务四</div>
+							<div class="task-ope">
+								<div class="task-edit"></div>
+								<div class="task-assign"></div>
+								<div class="task-del"></div>
+							</div>
+							<div class="task-time">
+								<div class="tt-created">2021-07-29 17:20:03</div>
+								<div class="tt-updated">2021-07-29 17:20:03</div>
+							</div>
 						</div>
 					</div>
-					<div class="task-item">
-						<div class="task-mark">
-							<div class="task-mark-item left-top"></div>
-							<div class="task-mark-item right-bottom"></div>
-						</div>
-						<div class="task-cont">任务二</div>
-						<div class="task-ope">
-							<div class="task-edit"></div>
-							<div class="task-assign"></div>
-							<div class="task-del"></div>
-						</div>
-						<div class="task-time">
-							<div class="tt-created">2021-07-29 17:20:03</div>
-							<div class="tt-updated">2021-07-29 17:20:03</div>
-						</div>
-					</div>
-					<div class="task-item">
-						<div class="task-mark">
-							<div class="task-mark-item right-bottom"></div>
-							<div class="task-mark-item top-bottom"></div>
-						</div>
-						<div class="task-cont">任务三</div>
-						<div class="task-ope">
-							<div class="task-edit"></div>
-							<div class="task-assign"></div>
-							<div class="task-del"></div>
-						</div>
-						<div class="task-time">
-							<div class="tt-created">2021-07-29 17:20:03</div>
-							<div class="tt-updated">2021-07-29 17:20:03</div>
-						</div>
-					</div>
-					<div class="task-item">
-						<div class="task-mark">
-							<div class="task-mark-item left-top"></div>
-							<div class="task-mark-item right-bottom"></div>
-						</div>
-						<div class="task-cont">任务四</div>
-						<div class="task-ope">
-							<div class="task-edit"></div>
-							<div class="task-assign"></div>
-							<div class="task-del"></div>
-						</div>
-						<div class="task-time">
-							<div class="tt-created">2021-07-29 17:20:03</div>
-							<div class="tt-updated">2021-07-29 17:20:03</div>
-						</div>
-					</div>
+					<div class="task-add"></div>
 				</div>
 			</div>
 		</div>
@@ -271,7 +318,7 @@
 </body>
 <script type="text/javascript" src="assets/js/Sortable.min.js"></script>
 <script type="text/javascript">
-	new Sortable(document.getElementById('task'), {
+	new Sortable(document.getElementById('task-list'), {
 		animation: 150,
 		ghostClass: "dg-ghostClass",
 		dragClass: "dg-dragClass",
