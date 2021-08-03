@@ -118,7 +118,7 @@
 			cursor: pointer;
 		}
 		.task-item:hover {
-			background: #ffeb3b;
+			background: #fff7af;
 		}
 		.task-item:hover .task-ope {
 			visibility: visible;
@@ -167,14 +167,18 @@
 			top: -0.75px;
 			right: -120px;
 			font-size: 6px;
-			border: 1px dashed #00ab39;
+			border: 1px solid #24e063;
 			padding: 0px 3px;
+			opacity: 0;
+			transition: opacity 0.3s;
 		}
 		.tt-created {
-			border-bottom: 1px solid #ccc;
+			padding-top: 1px;
+			border-bottom: 1px dashed #000;
 		}
 		.task-ope:hover + .task-time{
 			visibility: visible;
+			opacity: 1;
 		}
 	</style>
 	<link rel="stylesheet" type="text/css" href="assets/css/contextMenu.css">
