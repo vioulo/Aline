@@ -49,22 +49,23 @@
 			display: grid;
 			grid-template-columns: 8px 8px;
 			background: #f3f3fd;
+			cursor: pointer;
 		}
 		.list-mark-item.left-top {
-			background: #ff00dd;
+			background: #f72dc0;
 			grid-column-start: 1;
 			grid-column-end: 2;
 			grid-row-start: 1;
 			grid-row-end: 2;
 		}
 		.list-mark-item.right-top {
-			background: #2163ff;
+			background: #00fcff;
 			grid-column-start: 2;
 			grid-row-start: 1;
 			grid-row-end: 2;
 		}
 		.list-mark-item.left-bottom {
-			background: #2163ff;
+			background: #fff;
 			grid-column-start: 1;
 			grid-column-end: 2;
 			grid-row-start: 2;
@@ -75,6 +76,7 @@
 			grid-row-start: 2;
 		}
 		.list-cont {
+			width: 100%;
 			margin-left: 6px;
 		}
 		.list-item:hover {
@@ -112,6 +114,15 @@
 		.box:hover .list-go {
 			visibility: visible;
 		}
+		.list-input {
+			border: 1px dashed #0172ff;
+			margin-top: 6px;
+			width: 100%;
+			padding: 3px;
+		}
+		.list-input::placeholder {
+			color: #aac8ef;
+		}
 	</style>
 </head>
 <body class="flex-abc">
@@ -121,6 +132,8 @@
 				<div class="list-item">
 					<div class="list-mark">
 						<div class="list-mark-item left-top"></div>
+						<div class="list-mark-item right-top"></div>
+						<div class="list-mark-item left-bottom"></div>
 						<div class="list-mark-item right-bottom"></div>
 					</div>
 					<div class="list-cont">任务一</div>
@@ -147,6 +160,7 @@
 					<div class="list-cont">任务四</div>
 				</div>
 			</div>
+			<div class="buffer-area"></div>
 			<div class="list-go" role=""></div>
 			<div class="list-add" role=""></div>
 		</div>
@@ -158,7 +172,27 @@
 		animation: 150,
 		ghostClass: "dg-ghostClass",
 		dragClass: "dg-dragClass",
-		removeCloneOnHide: true
+		removeCloneOnHide: true,
+		// filter: '.list-input'
 	});
+</script>
+<script type="text/javascript" src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script type="text/javascript">
+	$(".list-add").on("click", function() {
+
+		if ($(".list-input").length > 0) return;
+		$(".buffer-area").append('<input type="text" class="list-input" placeholder="输入信息 - 回车确认">');
+	});
+
+	$(".buffer-area").on("keydown", ".list-input", function(e) {
+
+		let cont = $(this).val();
+		if (e.keyCode == 13 && cont.length > 1) {
+
+			$(this).remove();
+			let item = `<div class="list-item"><div class="list-mark"></div><div class="list-cont">${cont}</div></div>`;
+			$("#T-list").append(item);
+		}
+	})
 </script>
 </html>
