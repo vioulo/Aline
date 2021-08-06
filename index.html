@@ -39,15 +39,6 @@
 			height: 100%;
 			width: 100%;
 		}
-		.project {
-			width: 200px;
-			height: 100%;
-			text-align: right;
-			padding: 0 4px;
-			border-right: 1px dashed #e3e3e3;
-			font-size: 14px;
-			position: relative;
-		}
 		.task {
 			width: calc(100% - 200px);
 			height: 100%;
@@ -160,23 +151,33 @@
 		.tt-created {
 			border-bottom: 1px dashed #000;
 		}
-		.task-ope:hover + .task-time{
+		.task-ope:hover + .task-time {
 			visibility: visible;
 			opacity: 1;
 		}
-		.task-add, .project-add {
+		.list-add, .list-go {
 			visibility: hidden;
-			width: 16px;
-			height: 16px;
+			width: 13px;
+			height: 13px;
 			margin-top: 6px;
 			border: 1px solid #ccc;
+			border-radius: 13px;
 			box-shadow: 2px 2px 4px #ccc;
+			display: inline-block;
 		}
-		.task-add:hover, .project-add:hover {
+		.list-add:hover, .list-go:hover {
 			cursor: pointer;
 			border-color: #5591ff;
 		}
-		.task:hover .task-add {
+		.jt-go {
+			position: absolute;
+			right: 4px;
+			box-shadow: -2px 2px 4px #ccc;
+		}
+		.task:hover .list-add {
+			visibility: visible;
+		}
+		.task:hover .list-go {
 			visibility: visible;
 		}
 	</style>
@@ -252,7 +253,8 @@
 							</div>
 						</div>
 					</div>
-					<div class="task-add"></div>
+					<div class="list-add"></div>
+					<div class="list-go"></div>
 				</div>
 			</div>
 		</div>
