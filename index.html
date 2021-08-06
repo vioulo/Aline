@@ -43,6 +43,9 @@
 			border: 1px solid #ccc;
 			position: relative;
 		}
+		.list-item.active {
+			box-shadow: 0px 2px 4px #bbdcfd;
+		}
 		.list-mark {
 			width: 16px;
 			height: 16px;
@@ -148,13 +151,51 @@
 		.list-input::placeholder {
 			color: #aac8ef;
 		}
+		.list-detail {
+			border: 1px solid #ccc;
+			margin: 6px;
+			padding: 6px;
+		}
+		.detail-top {
+			display: flex;
+			justify-content: space-between;
+			border-bottom: 1px dashed #ccc;
+			padding-bottom: 3px;
+		}
+		.ublk {
+			width: 16px;
+			height: 16px;
+			background: #ccc;
+			margin-right: 6px;
+		}
+		.time {
+			font-size: 12px;
+		}
+		.time-created {
+			border-right: 1px solid blue;
+			padding-right: 6px;
+			margin-right: 6px;
+		}
+		.commit {
+			margin-top: 6px;
+			font-size: 12px;
+		}
+		.commit-item {
+
+		}
+		.commit-input {
+			border: 1px solid #ddd;
+			width: 100%;
+			padding: 3px;
+			margin-top: 6px;
+		}
 	</style>
 </head>
 <body class="flex-abc">
 	<div class="outer">
 		<div class="box">
 			<div id="T-list">
-				<div class="list-item">
+				<div class="list-item active">
 					<div class="list-mark">
 						<div class="list-mark-item left-top" bgi="0" bgc=""></div>
 						<div class="list-mark-item right-top" bgi="0" bgc=""></div>
@@ -162,6 +203,27 @@
 						<div class="list-mark-item right-bottom" bgi="0" bgc=""></div>
 					</div>
 					<div class="list-cont">任务一</div>
+				</div>
+				<div class="list-detail">
+					<div class="detail-top">
+						<div class="collaborator flex">
+							<div class="ublk"></div>
+							<div class="ublk"></div>
+							<div class="ublk"></div>
+						</div>
+						<div class="time flex">
+							<div class="time-created">2021-08-06 16:15:28</div>
+							<div class="time-updated">2021-08-06 16:15:28</div>
+						</div>
+					</div>
+					<div class="commit">
+						<div class="commit-item">
+							Ace：这是一个有趣的任务，需要通过学习新的东西来解决！
+						</div>
+						<div>
+							<input type="text" class="commit-input">
+						</div>
+					</div>
 				</div>
 				<div class="list-item">
 					<div class="list-mark">
@@ -204,7 +266,7 @@
 		ghostClass: "dg-ghostClass",
 		// dragClass: "dg-dragClass",
 		removeCloneOnHide: true,
-		// filter: '.list-input'
+		// filter: '.list-detail' // 禁用之后 input 不能输入 // 需要想办法做个开关，在编辑时候禁用拖动排序
 	});
 </script>
 <script type="text/javascript" src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
