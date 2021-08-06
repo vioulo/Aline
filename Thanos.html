@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+	<meta charset="UTF-8">
+	<title>CodePen - Thanos</title>
+	<style>
+		.thanos-snap {
+		width: 80px;
+		height: 80px;
+		background: url(./assets/Thanos/imgs/thanos_snap.png);
+		cursor: pointer;
+		}
+		.thanos-time {
+		width: 80px;
+		height: 80px;
+		background: url(./assets/Thanos/imgs/thanos_time.png);
+		cursor: pointer;
+		}
+		.thanos-animation {
+		animation: snap 1s steps(48) 0s 1;
+		}
+		@keyframes snap {
+		to {
+		background-position: -4800% 0;
+		}
+		}
+		.wrap {
+		margin-top: 20px;
+		display: flex;
+		}
+		.item {
+		display: flex;
+		flex-direction:column;
+		justify-cointent: center;
+		align-items:center;
+		}
+
+		.info-wrap {
+		overflow: hidden;
+		position: relative;
+		width: 300px;
+		height: 100px;
+		}
+		.info {
+		box-sizing: border-box;
+		border: 1px dashed #FF6666;
+		text-align: center;
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 300px;
+		height: 100px;
+		}
+		.info-hide-short {
+		animation: hide .5s ease-in-out 1 both;
+		}
+
+		@keyframes hide {
+		from {
+		opacity: 1;
+		}
+		to {
+		opacity: 0;
+		}
+		}
+
+		/* position canvas' on top of elm */
+		.disintegration-container {
+		position: absolute;
+		left: 0;
+		top: 0;
+		}
+		/* position canvas' and set their transitions */
+		.disintegration-container canvas {
+		position: absolute;
+		left: 0;
+		top: 0;
+		opacity: 1;
+		transition: transform 1s, opacity 1s;
+		}
+
+		.tips {
+		color: #CC3333;
+		}
+		html, body {
+		min-height: 600px;
+		}
+		body {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		}
+	</style>
+</head>
+
+<body translate="no" >
+	<div class="info-wrap" id="info-wrap">
+		<div class="info" id="info">
+			<h3>Thanos 灭霸</h3>
+			<p>点击图片查看动画效果</p>
+		</div>
+	</div>
+	<div class="wrap">
+		<div class="item">
+			<div class="thanos-snap" id="thanos-snap"></div>
+			<p>响指</p>
+		</div>
+		<div class="item">
+			<div class="thanos-time" id="thanos-time"></div>
+			<p>恢复</p>
+		</div>
+	</div>
+</body>
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/html2canvas/0.5.0-beta4/html2canvas.js"></script>
+<script id="rendered-js" >
+	$(() => {
+		// 获取元素
+		const COUNT = 32;
+		const info = $("#info");
+		const infoWrap = $("#info-wrap");
+		const thanosSnap = $("#thanos-snap");
+		const thanosTime = $("#thanos-time");
+		const $container = document.createElement("div");
+		let status = false;
+
+		// 处理点击事件
+		thanosSnap.click(function () {
+			thanosSnap.addClass("thanos-animation");
+			disintegrate(info[0]);
+			let audio = new Audio(`./assets/Thanos/mp3/thanos_dust_1.mp3`) // https://cdn.elgoog.im/thanos/mp3/thanos_dust_1.mp3
+			audio.play()
+		});
+		thanosTime.click(function () {
+			thanosTime.addClass("thanos-animation");
+			recover();
+			let audio = new Audio("./assets/Thanos/mp3/thanos_reverse_sound.mp3")
+			audio.play()
+		});
+		// 监听动画结束
+		thanosSnap.on("animationend", () => {
+			thanosSnap.removeClass("thanos-animation");
+		});
+		thanosTime.on("animationend", () => {
+			thanosTime.removeClass("thanos-animation");
+		});
+
+		// 粒子化消散
+		function disintegrate($elm) {
+			if (status) return;
+			status = true;
+			html2canvas($elm).then(canvas => {
+				// document.body.appendChild(canvas);
+				// canvas 是id 为 info 的元素转化成的
+				const ctx = canvas.getContext("2d");
+				const { width, height } = canvas;
+				// 获取 canvs 的像素数据
+				const originalFrame = ctx.getImageData(0, 0, width, height);
+				// 循环创建多个像素对象，注意像素对象默认是透明的。
+				const frames = [];
+				for (let i = 0; i < COUNT; i++) {
+					// if (window.CP.shouldStopExecution(0)) break;
+					frames[i] = ctx.createImageData(width, height);
+				}
+
+				// 将原始的像素数据，随机分散到多个canvas上面，粒子化
+				// window.CP.exitedLoop(0);
+				for (let x = 0; x < width; x++) {
+					for (let y = 0; y < height; y++) {
+						// 随机获取 像素对象
+						const frameIndex = Math.floor(Math.random() * COUNT);
+						// 当前的像素位置：通过 x、y计算出当前遍历到哪个像素点，实际就是从左到右,一行一行的遍历
+						const pixelIndex = 4 * (y * width + x);
+						// 一个像素 rgba  ，所以需要设置 4 个值
+						for (let z = 0; z < 4; z++) {
+							frames[frameIndex].data[pixelIndex + z] = originalFrame.data[pixelIndex + z];
+						}
+					}
+				}
+				// 添加元素的父容器
+				$container.classList.add("disintegration-container");
+				$container.style.width = `${width}px`;
+				$container.style.height = `${height}px`;
+
+				// 遍历像素对象，将像素对象填充到画布上面
+				const $canvasNodes = frames.map((item, i) => {
+					const $c = canvas.cloneNode(true);
+					$c.getContext("2d").putImageData(item, 0, 0);
+					$c.style.transitionDelay = `${i / COUNT}s`;
+					$container.appendChild($c);
+					return $c;
+				});
+
+				// 给 info元素 添加隐藏动画
+				info.addClass("info-hide-short");
+				// 将复制的图像完整的展示在页面上
+				infoWrap.append($container);
+				// 强制 reflow: 因为使用 append ，浏览器内部对样式更改做了优化，所以如果不强制浏览器重排，会造成样式更改之后，整个元素才被添加到页面上渲染出来。
+				$container.offsetLeft;
+
+				// 对粒子添加动画，完整图像开始消散
+				$canvasNodes.forEach((item, i) => {
+					let randomRadian = 2 * Math.PI * (Math.random() - 0.5)
+
+					item.style.transform = `rotate(${15 * (Math.random() - 0.5)}deg) translate(${60 * Math.cos(randomRadian)}px, ${30 * Math.sin(randomRadian)}px) rotate(${15 * (Math.random() - 0.5)}deg)`;
+					item.style.opacity = 0;
+				});
+			});
+		}
+
+		// 还原
+		function recover() {
+			if (!status) return;
+			status = false;
+			info.removeClass("info-hide-short");
+			$($container).empty();
+		}
+	});
+</script>
+</html>
