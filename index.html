@@ -31,21 +31,11 @@
 			align-items: center;
 			justify-content: center;
 		}
-		.container {
-			width: 900px;
-			height: 600px;
+		.box {
+			width: 700px;
+			height: 700px;
 		}
-		.blocks {
-			height: 100%;
-			width: 100%;
-		}
-		.task {
-			width: calc(100% - 200px);
-			height: 100%;
-			/*background: #23887691;*/
-			padding: 0 4px;
-		}
-		.task-item {
+		.list-item {
 			display: flex;
 			font-size: 13px;
 			margin-bottom: -1px;
@@ -53,41 +43,41 @@
 			border: 1px solid #ccc;
 			position: relative;
 		}
-		.task-mark {
+		.list-mark {
 			width: 16px;
 			height: 16px;
 			display: grid;
 			grid-template-columns: 8px 8px;
 			background: #f3f3fd;
 		}
-		.task-mark-item.left-top {
+		.list-mark-item.left-top {
 			background: #ff00dd;
 			grid-column-start: 1;
 			grid-column-end: 2;
 			grid-row-start: 1;
 			grid-row-end: 2;
 		}
-		.task-mark-item.right-top {
+		.list-mark-item.right-top {
 			background: #2163ff;
 			grid-column-start: 2;
 			grid-row-start: 1;
 			grid-row-end: 2;
 		}
-		.task-mark-item.left-bottom {
+		.list-mark-item.left-bottom {
 			background: #2163ff;
 			grid-column-start: 1;
 			grid-column-end: 2;
 			grid-row-start: 2;
 		}
-		.task-mark-item.right-bottom {
+		.list-mark-item.right-bottom {
 			background: #2163ff;
 			grid-column-start: 2;
 			grid-row-start: 2;
 		}
-		.task-cont {
+		.list-cont {
 			margin-left: 6px;
 		}
-		.task-item:hover {
+		.list-item:hover {
 			background: #fff7af;
 		}
 		.dg-ghostClass {
@@ -116,64 +106,55 @@
 			cursor: pointer;
 			border-color: #5591ff;
 		}
-		.jt-go {
-			position: absolute;
-			right: 4px;
-			box-shadow: -2px 2px 4px #ccc;
-		}
-		.task:hover .list-add {
+		.box:hover .list-add {
 			visibility: visible;
 		}
-		.task:hover .list-go {
+		.box:hover .list-go {
 			visibility: visible;
 		}
 	</style>
 </head>
 <body class="flex-abc">
 	<div class="outer">
-		<div class="container">
-			<div class="blocks">
-				<div class="task">
-					<div id="task-list">
-						<div class="task-item">
-							<div class="task-mark">
-								<div class="task-mark-item left-top"></div>
-								<div class="task-mark-item right-bottom"></div>
-							</div>
-							<div class="task-cont">任务一</div>
-						</div>
-						<div class="task-item">
-							<div class="task-mark">
-								<div class="task-mark-item left-top"></div>
-								<div class="task-mark-item right-bottom"></div>
-							</div>
-							<div class="task-cont">任务二</div>
-						</div>
-						<div class="task-item">
-							<div class="task-mark">
-								<div class="task-mark-item right-bottom"></div>
-								<div class="task-mark-item top-bottom"></div>
-							</div>
-							<div class="task-cont">任务三</div>
-						</div>
-						<div class="task-item">
-							<div class="task-mark">
-								<div class="task-mark-item left-top"></div>
-								<div class="task-mark-item right-bottom"></div>
-							</div>
-							<div class="task-cont">任务四</div>
-						</div>
+		<div class="box">
+			<div id="T-list">
+				<div class="list-item">
+					<div class="list-mark">
+						<div class="list-mark-item left-top"></div>
+						<div class="list-mark-item right-bottom"></div>
 					</div>
-					<div class="list-add"></div>
-					<div class="list-go"></div>
+					<div class="list-cont">任务一</div>
+				</div>
+				<div class="list-item">
+					<div class="list-mark">
+						<div class="list-mark-item left-top"></div>
+						<div class="list-mark-item right-bottom"></div>
+					</div>
+					<div class="list-cont">任务二</div>
+				</div>
+				<div class="list-item">
+					<div class="list-mark">
+						<div class="list-mark-item right-bottom"></div>
+						<div class="list-mark-item top-bottom"></div>
+					</div>
+					<div class="list-cont">任务三</div>
+				</div>
+				<div class="list-item">
+					<div class="list-mark">
+						<div class="list-mark-item left-top"></div>
+						<div class="list-mark-item right-bottom"></div>
+					</div>
+					<div class="list-cont">任务四</div>
 				</div>
 			</div>
+			<div class="list-go" role=""></div>
+			<div class="list-add" role=""></div>
 		</div>
 	</div>
 </body>
 <script type="text/javascript" src="assets/js/Sortable.min.js"></script>
 <script type="text/javascript">
-	new Sortable(document.getElementById('task-list'), {
+	new Sortable(document.getElementById('T-list'), {
 		animation: 150,
 		ghostClass: "dg-ghostClass",
 		dragClass: "dg-dragClass",
