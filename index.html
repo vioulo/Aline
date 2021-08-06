@@ -52,28 +52,54 @@
 			cursor: pointer;
 		}
 		.list-mark-item.left-top {
-			background: #f72dc0;
 			grid-column-start: 1;
 			grid-column-end: 2;
 			grid-row-start: 1;
 			grid-row-end: 2;
 		}
 		.list-mark-item.right-top {
-			background: #00fcff;
 			grid-column-start: 2;
 			grid-row-start: 1;
 			grid-row-end: 2;
 		}
 		.list-mark-item.left-bottom {
-			background: #fff;
 			grid-column-start: 1;
 			grid-column-end: 2;
 			grid-row-start: 2;
 		}
 		.list-mark-item.right-bottom {
-			background: #2163ff;
 			grid-column-start: 2;
 			grid-row-start: 2;
+		}
+		.bg-black {
+			background: #000;
+		}
+		.bg-white {
+			background: #fff;
+		}
+		.bg-grey {
+			background: #8e8e8e;
+		}
+		.bg-blue {
+			background: #2163ff;
+		}
+		.bg-green {
+			background: #34ca94;
+		}
+		.bg-yellow {
+			background: #f9e53a;
+		}
+		.bg-red {
+			background: #ca3434;
+		}
+		.bg-pink {
+			background: #f72dc0;
+		}
+		.bg-purple {
+			background: #bd35ff;
+		}
+		.bg-orange {
+			background: #ff9800;
 		}
 		.list-cont {
 			width: 100%;
@@ -131,31 +157,37 @@
 			<div id="T-list">
 				<div class="list-item">
 					<div class="list-mark">
-						<div class="list-mark-item left-top"></div>
-						<div class="list-mark-item right-top"></div>
-						<div class="list-mark-item left-bottom"></div>
-						<div class="list-mark-item right-bottom"></div>
+						<div class="list-mark-item left-top" bgi="0" bgc=""></div>
+						<div class="list-mark-item right-top" bgi="0" bgc=""></div>
+						<div class="list-mark-item left-bottom" bgi="0" bgc=""></div>
+						<div class="list-mark-item right-bottom" bgi="0" bgc=""></div>
 					</div>
 					<div class="list-cont">任务一</div>
 				</div>
 				<div class="list-item">
 					<div class="list-mark">
-						<div class="list-mark-item left-top"></div>
-						<div class="list-mark-item right-bottom"></div>
+						<div class="list-mark-item left-top" bgi="0" bgc=""></div>
+						<div class="list-mark-item right-top" bgi="0" bgc=""></div>
+						<div class="list-mark-item left-bottom" bgi="0" bgc=""></div>
+						<div class="list-mark-item right-bottom" bgi="0" bgc=""></div>
 					</div>
 					<div class="list-cont">任务二</div>
 				</div>
 				<div class="list-item">
 					<div class="list-mark">
-						<div class="list-mark-item right-bottom"></div>
-						<div class="list-mark-item top-bottom"></div>
+						<div class="list-mark-item left-top" bgi="0" bgc=""></div>
+						<div class="list-mark-item right-top" bgi="0" bgc=""></div>
+						<div class="list-mark-item left-bottom" bgi="0" bgc=""></div>
+						<div class="list-mark-item right-bottom" bgi="0" bgc=""></div>
 					</div>
 					<div class="list-cont">任务三</div>
 				</div>
 				<div class="list-item">
 					<div class="list-mark">
-						<div class="list-mark-item left-top"></div>
-						<div class="list-mark-item right-bottom"></div>
+						<div class="list-mark-item left-top" bgi="0" bgc=""></div>
+						<div class="list-mark-item right-top" bgi="0" bgc=""></div>
+						<div class="list-mark-item left-bottom" bgi="0" bgc=""></div>
+						<div class="list-mark-item right-bottom" bgi="0" bgc=""></div>
 					</div>
 					<div class="list-cont">任务四</div>
 				</div>
@@ -190,9 +222,25 @@
 		if (e.keyCode == 13 && cont.length > 1) {
 
 			$(this).remove();
-			let item = `<div class="list-item"><div class="list-mark"></div><div class="list-cont">${cont}</div></div>`;
+			let list_mark = '<div class="list-mark-item left-top" bgi="0" bgc=""></div><div class="list-mark-item right-top" bgi="0" bgc=""></div>' +
+			'<div class="list-mark-item left-bottom" bgi="0" bgc=""></div><div class="list-mark-item right-bottom" bgi="0" bgc=""></div>';
+			let item = `<div class="list-item"><div class="list-mark">${list_mark}</div><div class="list-cont">${cont}</div></div>`;
+
 			$("#T-list").append(item);
 		}
 	})
+
+	$("#T-list").on("click", ".list-mark-item", function() {
+
+		let bg_index = $(this).attr("bgi");
+		let bg_color = $(this).attr("bgc");
+		let bg_next  = bg_index > 8 ? 0 : parseInt(bg_index) + 1;
+		let colors = ['black', 'white', 'grey', 'blue', 'green', 'yellow', 'red', 'pink', 'purple', 'orange'];
+
+		$(this).removeClass('bg-' + bg_color);
+		$(this).addClass("bg-" + colors[bg_next]);
+		$(this).attr("bgi", bg_next);
+		$(this).attr("bgc", colors[bg_next]);
+	});
 </script>
 </html>
