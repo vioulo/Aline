@@ -54,22 +54,6 @@
 			/*background: #23887691;*/
 			padding: 0 4px;
 		}
-		.project-item {
-			border: 1px solid #ccc;
-			margin-bottom: -1px;
-			position: relative;
-			padding: 3px 6px;
-			background: linear-gradient(to left, #ddd 63%, #fff 0%);
-		}
-		.project-item.active {
-			z-index: 1;
-			border-color: #5b8ff3;
-			color: #fff;
-			background: linear-gradient(to left, #6892f5 83%, #fff 0%);
-		}
-		.project-item:hover {
-			border-left-color: #5b8ff3;
-		}
 		.task-item {
 			display: flex;
 			font-size: 13px;
@@ -192,32 +176,7 @@
 			cursor: pointer;
 			border-color: #5591ff;
 		}
-		.project-add {
-			position: absolute;
-			right: 4px;
-			box-shadow: -2px 2px 4px #ccc;
-		}
 		.task:hover .task-add {
-			visibility: visible;
-		}
-		.project:hover .project-add {
-			visibility: visible;
-		}
-		.pi-ope {
-			visibility: hidden;
-			width: 8px;
-			height: 8px;
-			position: absolute;
-			top: -4px;
-			left: -4px;
-			border: 1px solid #5a58d0;
-			border-radius: 5px;
-			background: #3562e0;
-			box-shadow: 2px 4px 4px #ccc;
-			z-index: 10;
-			cursor: pointer;
-		}
-		.project-item:hover .pi-ope {
 			visibility: visible;
 		}
 	</style>
@@ -225,24 +184,7 @@
 <body class="flex-abc">
 	<div class="outer">
 		<div class="container">
-			<div class="blocks flex-row">
-				<div class="project">
-					<div class="project-list">
-						<div class="project-item active">
-							<div class="p-item-inner">
-								<font>看板基础操作</font>
-							</div>
-							<div class="pi-ope"></div>
-						</div>
-						<div class="project-item">
-							<div class="p-item-inner">
-								<font>看板数据保存</font>
-							</div>
-							<div class="pi-ope"></div>
-						</div>
-					</div>
-					<div class="project-add"></div>
-				</div>
+			<div class="blocks">
 				<div class="task">
 					<div id="task-list">
 						<div class="task-item">
