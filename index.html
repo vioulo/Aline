@@ -122,8 +122,10 @@
 		.dg-ghostClass * {
 			visibility: hidden;
 		}
-		.list-add, .list-go, .list-sort {
+		.list-ope {
 			visibility: hidden;
+		}
+		.list-sort, .list-go, .list-add {
 			width: 13px;
 			height: 13px;
 			margin-top: 6px;
@@ -131,19 +133,49 @@
 			border-radius: 13px;
 			box-shadow: 2px 2px 4px #ccc;
 			display: inline-block;
-		}
-		.list-add:hover, .list-go:hover, .list-sort:hover {
 			cursor: pointer;
-			border-color: #5591ff;
 		}
-		.box:hover .list-add {
-			visibility: visible;
+		.list-sort {
+			animation-delay: 200ms;
+			animation-fill-mode: backwards !important;
 		}
-		.box:hover .list-go {
-			visibility: visible;
+		.list-go {
+			animation-delay: 400ms;
+			animation-fill-mode: backwards !important;
 		}
-		.box:hover .list-sort {
+		.list-add {
+			animation-delay: 600ms;
+			animation-fill-mode: backwards !important;
+		}
+		.list-sort:hover {
+			border-color: #01a9dc;
+			background: #01c4ff;
+			box-shadow: 2px 2px 4px #676767;
+		}
+		.list-go:hover {
+			border-color: #005aff;
+			background: #0072ff;
+			box-shadow: 2px 2px 4px #676767;
+		}
+		.list-add:hover {
+			border-color: #008e00;
+			background: #00c100;
+			box-shadow: 2px 2px 4px #676767;
+		}
+		.box:hover .list-ope * {
 			visibility: visible;
+			animation-name: ani-bin;
+			animation-duration: 1s;
+		}
+		@keyframes ani-bin {
+			from {
+				transform: translateY(10px);
+				opacity: 0;
+			}
+			to {
+				transform: translateY(0px);
+				opacity: 1;
+			}
 		}
 		.list-input {
 			border: 1px dashed #007bff;
