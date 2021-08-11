@@ -43,8 +43,12 @@
 			border: 1px solid #ccc;
 			position: relative;
 		}
-		.list-item.active {
+		.list-item:hover, .list-item.active {
+			background: #007bffd6;
+			border: 1px solid #007bff;
 			box-shadow: 0px 2px 4px #bbdcfd;
+			color: #fff;
+			z-index: 1;
 		}
 		.list-mark {
 			width: 16px;
@@ -107,12 +111,6 @@
 		.list-cont {
 			width: 100%;
 			margin-left: 6px;
-		}
-		.list-item:hover {
-			background: #007bffd6;
-			border: 1px solid #007bff;
-			color: #fff;
-			z-index: 1;
 		}
 		.dg-ghostClass {
 			height: 33px;
@@ -237,7 +235,7 @@
 	<div class="outer">
 		<div class="box">
 			<div id="T-list">
-				<div class="list-item active">
+				<div class="list-item">
 					<div class="list-mark">
 						<div class="list-mark-item left-top" bgi="0" bgc=""></div>
 						<div class="list-mark-item right-top" bgi="0" bgc=""></div>
@@ -245,27 +243,6 @@
 						<div class="list-mark-item right-bottom" bgi="0" bgc=""></div>
 					</div>
 					<div class="list-cont">任务一</div>
-				</div>
-				<div class="list-detail">
-					<div class="detail-top">
-						<div class="collaborator flex">
-							<div class="ublk"></div>
-							<div class="ublk"></div>
-							<div class="ublk"></div>
-						</div>
-						<div class="list-time">
-							<div class="time-created">2021-08-06 16:15:28</div>
-							<div class="time-updated">2021-08-06 16:15:28</div>
-						</div>
-					</div>
-					<div class="commit">
-						<div class="commit-item">
-							Ace：这是一个有趣的任务，需要通过学习新的东西来解决！
-						</div>
-						<div>
-							<input type="text" class="commit-input" placeholder="输入信息 - 回车确认">
-						</div>
-					</div>
 				</div>
 				<div class="list-item">
 					<div class="list-mark">
@@ -297,9 +274,9 @@
 			</div>
 			<div class="buffer-area"></div>
 			<div class="list-ope">
-				<div class="list-sort" role=""></div>
-				<div class="list-go" role=""></div>
-				<div class="list-add" role=""></div>
+				<div class="list-sort" title="拖拽排序" role=""></div>
+				<div class="list-go" title="查看项目" role=""></div>
+				<div class="list-add" title="添加任务" role=""></div>
 			</div>
 		</div>
 	</div>
@@ -317,6 +294,9 @@
 <script type="text/javascript" src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script type="text/javascript">
 	$(".list-sort").on("click", function() {
+
+		$(".list-item").removeClass("active");
+		$(".list-detail").remove();
 
 		let sort_status = $(this).attr("role");
 		if (!sort_status || sort_status == 'sort_disabled') {
@@ -366,6 +346,24 @@
 		$(this).addClass("bg-" + colors[bg_next]);
 		$(this).attr("bgi", bg_next);
 		$(this).attr("bgc", colors[bg_next]);
+	});
+
+	$("#T-list").on("click", ".list-item", function() {
+
+		sort_list['options']['disabled'] = true;
+		$(".list-sort").attr("role", "sort_disabled");
+
+		$(".list-item").removeClass("active");
+		$(".list-detail").remove();
+		$(this).addClass("active");
+
+		let user_blk = '<div class="ublk"></div>';
+		let list_detail = `<div class="list-detail"><div class="detail-top"><div class="collaborator flex">${user_blk}</div>
+		<div class="list-time"><div class="time-created">2021-08-06 16:15:28</div><div class="time-updated">2021-08-06 16:15:28</div>
+		</div></div><div class="commit"><div class="commit-item">Ace：这是一个有趣的任务，需要通过学习新的东西来解决！</div><div>
+		<input type="text" class="commit-input" placeholder="输入信息 - 回车确认"></div></div></div>`;
+
+		$(this).after(list_detail);
 	});
 </script>
 </html>
