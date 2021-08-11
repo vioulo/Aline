@@ -322,22 +322,19 @@
 
 	$(".buffer-area").on("keydown", ".list-input", function(e) {
 
-		if (e.keyCode == 27) {
-
-			$(this).remove();
-			return;
-		}
+		if (![13, 27].includes(e.keyCode)) return;
 
 		let cont = $(this).val();
 		if (e.keyCode == 13 && cont.length > 1) {
 
-			$(this).remove();
 			let list_mark = '<div class="list-mark-item left-top" bgi="0" bgc=""></div><div class="list-mark-item right-top" bgi="0" bgc=""></div>' +
 			'<div class="list-mark-item left-bottom" bgi="0" bgc=""></div><div class="list-mark-item right-bottom" bgi="0" bgc=""></div>';
 			let item = `<div class="list-item"><div class="list-mark">${list_mark}</div><div class="list-cont">${cont}</div></div>`;
 
 			$("#T-list").append(item);
 		}
+
+		$(this).remove();
 	})
 
 	$("#T-list").on("click", ".list-mark-item", function() {
