@@ -122,7 +122,7 @@
 		.dg-ghostClass * {
 			visibility: hidden;
 		}
-		.list-add, .list-go {
+		.list-add, .list-go, .list-sort {
 			visibility: hidden;
 			width: 13px;
 			height: 13px;
@@ -132,7 +132,7 @@
 			box-shadow: 2px 2px 4px #ccc;
 			display: inline-block;
 		}
-		.list-add:hover, .list-go:hover {
+		.list-add:hover, .list-go:hover, .list-sort:hover {
 			cursor: pointer;
 			border-color: #5591ff;
 		}
@@ -140,6 +140,9 @@
 			visibility: visible;
 		}
 		.box:hover .list-go {
+			visibility: visible;
+		}
+		.box:hover .list-sort {
 			visibility: visible;
 		}
 		.list-input {
@@ -259,8 +262,11 @@
 				</div>
 			</div>
 			<div class="buffer-area"></div>
-			<div class="list-go" role=""></div>
-			<div class="list-add" role=""></div>
+			<div class="list-ope">
+				<div class="list-sort" role=""></div>
+				<div class="list-go" role=""></div>
+				<div class="list-add" role=""></div>
+			</div>
 		</div>
 	</div>
 </body>
