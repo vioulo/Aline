@@ -272,8 +272,9 @@
 </body>
 <script type="text/javascript" src="assets/js/Sortable.min.js"></script>
 <script type="text/javascript">
-	new Sortable(document.getElementById('T-list'), {
+	let sort_list = new Sortable(document.getElementById('T-list'), {
 		animation: 150,
+		disabled: true,
 		ghostClass: "dg-ghostClass",
 		// dragClass: "dg-dragClass",
 		removeCloneOnHide: true,
@@ -282,6 +283,19 @@
 </script>
 <script type="text/javascript" src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script type="text/javascript">
+	$(".list-sort").on("click", function() {
+
+		let sort_status = $(this).attr("role");
+		if (!sort_status || sort_status == 'sort_disabled') {
+
+			sort_list['options']['disabled'] = false;
+			$(this).attr("role", "sort_abled");
+		} else {
+			sort_list['options']['disabled'] = true;
+			$(this).attr("role", "sort_disabled");
+		}
+	});
+
 	$(".list-add").on("click", function() {
 
 		if ($(".list-input").length > 0) return;
