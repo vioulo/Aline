@@ -229,6 +229,11 @@
 			margin-top: 6px;
 			font-size: 12px;
 		}
+		.li-input {
+			border: 1px solid #fff;
+			margin-left: 6px;
+			width: 100%;
+		}
 	</style>
 </head>
 <body class="flex-abc">
@@ -364,6 +369,32 @@
 		<input type="text" class="commit-input" placeholder="输入信息 - 回车确认"></div></div></div>`;
 
 		$(this).after(list_detail);
+	});
+
+	$("#T-list").on("dblclick", ".list-item", function() {
+
+		let list_cont = $(this).find(".list-cont");
+		let text = list_cont.text();
+		let input = `<input type="text" class="li-input" value="${text}">`;
+
+		list_cont.css("display", "none");
+		$(this).append(input);
+	});
+
+	$("#T-list").on("keydown", ".li-input", function(e) {
+
+		if (![13, 27].includes(e.keyCode)) return;
+
+		let cont = $(this).val();
+		let list_cont = $(this).siblings(".list-cont");
+
+		if (e.keyCode == 13 && cont.length > 0) {
+
+			list_cont.text(cont);
+		}
+
+		list_cont.css("display", "unset");
+		$(this).remove();
 	});
 </script>
 </html>
