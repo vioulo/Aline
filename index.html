@@ -37,6 +37,7 @@
 		}
 		.list-item {
 			display: flex;
+			align-items: center;
 			font-size: 13px;
 			margin-bottom: -1px;
 			padding: 6px;
@@ -231,8 +232,47 @@
 		}
 		.li-input {
 			border: 1px solid #fff;
-			margin-left: 6px;
+			margin: 0 6px;
 			width: 100%;
+		}
+
+		.icon {
+			width: 16px;
+			height: 16px;
+			display: flex;
+			align-items: center;
+			position: relative;
+			cursor: pointer;
+		}
+		.icon::before, .icon::after {
+			content: '';
+			background-color: #fff;
+			position: absolute;
+			transition: .3s cubic-bezier(.8, .5, .2, 1.4);
+			width: 100%;
+			height: 1px;
+		}
+		.lower-triangle::before {
+			transform: rotate(45deg) scaleX(0.7);
+			left: -3.5px;
+		}
+		.lower-triangle::after {
+			transform: rotate(-45deg) scaleX(0.7);
+			left: 3.5px;
+		}
+		.upper-triangle::before {
+			transform: rotate(-45deg) scaleX(0.7);
+			left: -3.5px;
+		}
+		.upper-triangle::after {
+			transform: rotate(45deg) scaleX(0.7);
+			left: 3.5px;
+		}
+		.view-detail {
+			display: none;
+		}
+		.list-item:hover .view-detail {
+			display: flex;
 		}
 	</style>
 </head>
@@ -248,6 +288,7 @@
 						<div class="list-mark-item right-bottom" bgi="0" bgc=""></div>
 					</div>
 					<div class="list-cont">任务一</div>
+					<i class="icon lower-triangle view-detail" is_show="0"></i>
 				</div>
 				<div class="list-item">
 					<div class="list-mark">
@@ -257,6 +298,7 @@
 						<div class="list-mark-item right-bottom" bgi="0" bgc=""></div>
 					</div>
 					<div class="list-cont">任务二</div>
+					<i class="icon lower-triangle view-detail" is_show="0"></i>
 				</div>
 				<div class="list-item">
 					<div class="list-mark">
@@ -266,6 +308,7 @@
 						<div class="list-mark-item right-bottom" bgi="0" bgc=""></div>
 					</div>
 					<div class="list-cont">任务三</div>
+					<i class="icon lower-triangle view-detail" is_show="0"></i>
 				</div>
 				<div class="list-item">
 					<div class="list-mark">
@@ -275,6 +318,7 @@
 						<div class="list-mark-item right-bottom" bgi="0" bgc=""></div>
 					</div>
 					<div class="list-cont">任务四</div>
+					<i class="icon lower-triangle view-detail" is_show="0"></i>
 				</div>
 			</div>
 			<div class="buffer-area"></div>
@@ -350,14 +394,31 @@
 		$(this).attr("bgc", colors[bg_next]);
 	});
 
-	$("#T-list").on("click", ".list-item", function() {
+	$("#T-list").on("click", ".view-detail", function() {
+
+		let status = $(this).attr("is_show");
+
+		if (status == 1) {
+
+			$(".list-item").removeClass("active");
+			$(".list-detail").remove();
+			$(this).attr("is_show", "0");
+			$(this).addClass("lower-triangle");
+			$(this).removeClass("upper-triangle");
+			return;
+		}
+
+		let top_elm = $(this).parent(".list-item");
+		$(this).attr("is_show", "1");
+		$(this).removeClass("lower-triangle");
+		$(this).addClass("upper-triangle");
 
 		sort_list['options']['disabled'] = true;
 		$(".list-sort").attr("role", "sort_disabled");
 
 		$(".list-item").removeClass("active");
 		$(".list-detail").remove();
-		$(this).addClass("active");
+		top_elm.addClass("active");
 
 		let user_blk = '<div class="ublk"></div>';
 		let list_detail = `<div class="list-detail"><div class="detail-top"><div class="collaborator flex">${user_blk}</div>
@@ -365,17 +426,16 @@
 		</div></div><div class="commit"><div class="commit-item">Ace：这是一个有趣的任务，需要通过学习新的东西来解决！</div><div>
 		<input type="text" class="commit-input" placeholder="输入信息 - 回车确认"></div></div></div>`;
 
-		$(this).after(list_detail);
+		top_elm.after(list_detail);
 	});
 
-	$("#T-list").on("dblclick", ".list-item", function() {
+	$("#T-list").on("dblclick", ".list-cont", function() {
 
-		let list_cont = $(this).find(".list-cont");
-		let text = list_cont.text();
+		let text = $(this).text();
 		let input = `<input type="text" class="li-input" value="${text}">`;
 
-		list_cont.css("display", "none");
-		$(this).append(input);
+		$(this).css("display", "none");
+		$(this).after(input);
 	});
 
 	$("#T-list").on("keydown", ".li-input", function(e) {
