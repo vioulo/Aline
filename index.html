@@ -412,16 +412,23 @@
 			return;
 		}
 
-		let top_elm = $(this).parent(".list-item");
-		$(this).attr("is_show", "1");
-		$(this).removeClass("lower-triangle");
-		$(this).addClass("upper-triangle");
+		// other ->
+		$(".view-detail").removeClass("upper-triangle");
+		$(".view-detail").addClass("lower-triangle");
+		$(".view-detail").attr("is_show", "0");
 
 		sort_list['options']['disabled'] = true;
 		$(".list-sort").attr("role", "sort_disabled");
 
 		$(".list-item").removeClass("active");
 		$(".list-detail").remove();
+		// <- other
+
+		let top_elm = $(this).parent(".list-item");
+		$(this).attr("is_show", "1");
+		$(this).removeClass("lower-triangle");
+		$(this).addClass("upper-triangle");
+
 		top_elm.addClass("active");
 
 		let user_blk = '<div class="ublk"></div>';
