@@ -44,7 +44,7 @@
 			border: 1px solid #ccc;
 			position: relative;
 		}
-		.list-item:hover, .list-item.active {
+		.list-item:hover, .li-active {
 			background: #007bffd6;
 			border: 1px solid #007bff;
 			box-shadow: 0px 2px 4px #bbdcfd;
@@ -349,7 +349,7 @@
 <script type="text/javascript">
 	$(".list-sort").on("click", function() {
 
-		$(".list-item").removeClass("active");
+		$(".list-item").removeClass("li-active");
 		$(".list-detail").remove();
 
 		let sort_status = $(this).attr("role");
@@ -405,7 +405,7 @@
 
 		if (status == 1) {
 
-			$(".list-item").removeClass("active");
+			$(".list-item").removeClass("li-active");
 			$(".list-detail").remove();
 			$(this).attr("is_show", "0");
 			$(this).addClass("lower-triangle");
@@ -421,7 +421,7 @@
 		sort_list['options']['disabled'] = true;
 		$(".list-sort").attr("role", "sort_disabled");
 
-		$(".list-item").removeClass("active");
+		$(".list-item").removeClass("li-active");
 		$(".list-detail").remove();
 		// <- other
 
@@ -430,7 +430,7 @@
 		$(this).removeClass("lower-triangle");
 		$(this).addClass("upper-triangle");
 
-		top_elm.addClass("active");
+		top_elm.addClass("li-active");
 
 		let loading = `<div class="loading"><div class="lg-item dot-1"></div><div class="lg-item dot-2"></div><div class="lg-item dot-3"></div>
 		<div class="lg-item dot-4"></div><div class="lg-item dot-5"></div><div class="lg-item dot-6"></div></div>`;
