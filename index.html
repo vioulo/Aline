@@ -279,6 +279,7 @@
 			background: linear-gradient(to right, #0043ff 17%, #9999ff 0%);
 		}
 	</style>
+	<link rel="stylesheet" type="text/css" href="assets/css/loading.css">
 </head>
 <body class="flex-abc">
 	<div class="outer">
@@ -431,13 +432,23 @@
 
 		top_elm.addClass("active");
 
-		let user_blk = '<div class="ublk"></div>';
-		let list_detail = `<div class="list-detail"><div class="detail-top"><div class="collaborator flex">${user_blk}</div>
-		<div class="list-time"><div class="time-created">2021-08-06 16:15:28</div><div class="time-updated">2021-08-06 16:15:28</div>
-		</div></div><div class="commit"><div class="commit-item">Ace：这是一个有趣的任务，需要通过学习新的东西来解决！</div><div>
-		<input type="text" class="commit-input" placeholder="输入信息 - 回车确认"></div></div></div>`;
+		let loading = `<div class="loading"><div class="lg-item dot-1"></div><div class="lg-item dot-2"></div><div class="lg-item dot-3"></div>
+		<div class="lg-item dot-4"></div><div class="lg-item dot-5"></div><div class="lg-item dot-6"></div></div>`;
 
-		top_elm.after(list_detail);
+		top_elm.after(loading);
+
+		setTimeout(function() {
+
+			$(".loading").remove();
+
+			let user_blk = '<div class="ublk"></div>';
+			let list_detail = `<div class="list-detail"><div class="detail-top"><div class="collaborator flex">${user_blk}</div>
+			<div class="list-time"><div class="time-created">2021-08-06 16:15:28</div><div class="time-updated">2021-08-06 16:15:28</div>
+			</div></div><div class="commit"><div class="commit-item">Ace：这是一个有趣的任务，需要通过学习新的东西来解决！</div><div>
+			<input type="text" class="commit-input" placeholder="输入信息 - 回车确认"></div></div></div>`;
+
+			top_elm.after(list_detail);
+		}, 3000);
 	});
 
 	$("#T-list").on("dblclick", ".list-cont", function() {
